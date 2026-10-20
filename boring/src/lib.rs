@@ -157,6 +157,15 @@ pub mod symm;
 pub mod version;
 pub mod x509;
 
+struct Hello(usize);
+
+impl Drop for Hello {
+    fn drop(&mut self) {
+        panic!("This is bad!");
+    }
+
+}
+
 fn cvt_p<T>(r: *mut T) -> Result<*mut T, ErrorStack> {
     if r.is_null() {
         Err(ErrorStack::get())
